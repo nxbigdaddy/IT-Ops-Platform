@@ -1,0 +1,43 @@
+# .NET build outputs
+**/bin/
+**/obj/
+TestResults/
+coverage/
+artifacts/
+**/test-results/
+**/playwright-report/
+*.user
+*.suo
+.vs/
+
+# Frontend dependencies / build output
+**/node_modules/
+**/dist/
+**/.vite/
+**/.next/
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+**/appsettings.Local.json
+**/appsettings.*.Local.json
+**/secrets.json
+*.pfx
+*.p12
+*.key
+*.pem
+
+# Logs, databases, installers and temporary files
+*.log
+*.tmp
+*.bak
+*.db
+*.db-shm
+*.db-wal
+*.dump
+*.vhdx
+*.msi
+*.rootfs.tar.gz
+.DS_Store
+Thumbs.db

@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import {readBoundedJson} from '../src/frontend/src/bounded-json.ts';
+assert.deepEqual(await readBoundedJson(new Response('{"ok":true}'),11),{ok:true});
+await assert.rejects(()=>readBoundedJson(new Response('{"ok":true}'),10),/response_too_large/);
+await assert.rejects(()=>readBoundedJson(new Response('not-json')),SyntaxError);
+await assert.rejects(()=>readBoundedJson(new Response(new Uint8Array([0xff,0xfe]))),TypeError);
+await assert.rejects(()=>readBoundedJson(new Response(null)),/missing_response_body/);
+await assert.rejects(()=>readBoundedJson(new Response('{}'),0),/invalid_response_limit/);
+const encoded=new TextEncoder().encode('{"text":"中文"}');
+let index=0;
+const chunked=new ReadableStream({pull(c){if(index===encoded.length)c.close();else {c.enqueue(encoded.slice(index,index+1));index++;}}});
+assert.deepEqual(await readBoundedJson(new Response(chunked),encoded.length),{text:'中文'});
+let cancelled=false;
+const endless=new ReadableStream({pull(c){c.enqueue(new Uint8Array(30));},cancel(){cancelled=true;}});
+await assert.rejects(()=>readBoundedJson(new Response(endless),10),/response_too_large/);assert.equal(cancelled,true);
+const broken=new ReadableStream({start(c){c.error(new Error('synthetic stream failure'));}});
+await assert.rejects(()=>readBoundedJson(new Response(broken)),/synthetic stream failure/);
+console.log('PASS 9 bounded JSON checks including bytes, UTF-8, cancellation and stream failure.');

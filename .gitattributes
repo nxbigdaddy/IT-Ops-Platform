@@ -1,0 +1,7 @@
+# Keep source and documentation stable across Windows / WSL.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.pdf binary

@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {filterFeedback} from '../src/frontend/src/feedback-filter.ts';
+const all={state:'全部状态',department:'全部部门',priority:'全部优先级',query:''};
+const rows=[{id:'FB-One',module:'资产',text:'模拟 Disk',department:'IT 部门',state:'待评审',priority:'阻塞验收'}, {id:'FB-Two',module:'工单',text:'模拟',department:'财务部门',state:'已验收',priority:'一般'}];
+const original=JSON.stringify(rows);
+assert.deepEqual(filterFeedback(rows,all),rows);
+assert.deepEqual(filterFeedback(rows,{...all,query:'  fb-ONE '}),[rows[0]]);
+assert.deepEqual(filterFeedback(rows,{...all,query:'DISK'}),[rows[0]]);
+assert.deepEqual(filterFeedback(rows,{...all,query:'资产'}),[rows[0]]);
+assert.deepEqual(filterFeedback(rows,{...all,query:'   '}),rows);
+assert.deepEqual(filterFeedback(rows,{...all,department:'财务部门',priority:'阻塞验收'}),[]);
+assert.deepEqual(filterFeedback(rows,{...all,department:'IT 部门',priority:'阻塞验收',state:'待评审',query:'disk'}),[rows[0]]);
+assert.deepEqual(filterFeedback(rows,{...all,state:'unknown'}),[]);
+assert.equal(JSON.stringify(rows),original);
+console.log('PASS 9 feedback filter assertions: AND semantics, ID/module/text, case, whitespace and immutability.');

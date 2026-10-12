@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="OpsPlatform.Api/OpsPlatform.Api.csproj" />
+  <Project Path="../../tests/backend/OpsPlatform.Api.Tests/OpsPlatform.Api.Tests.csproj" />
+</Solution>

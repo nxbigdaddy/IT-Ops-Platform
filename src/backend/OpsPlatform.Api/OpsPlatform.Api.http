@@ -1,0 +1,39 @@
+@OpsPlatform.Api_HostAddress = http://localhost:5094
+
+GET {{OpsPlatform.Api_HostAddress}}/health/live
+
+### Expected 503: no verified database or authentication
+GET {{OpsPlatform.Api_HostAddress}}/health/ready
+
+### Development Demo only; synthetic fixtures
+GET {{OpsPlatform.Api_HostAddress}}/api/v1/dashboard
+
+###
+GET {{OpsPlatform.Api_HostAddress}}/api/v1/assets
+
+###
+GET {{OpsPlatform.Api_HostAddress}}/api/v1/alerts
+
+###
+GET {{OpsPlatform.Api_HostAddress}}/api/v1/tickets
+
+###
+GET {{OpsPlatform.Api_HostAddress}}/api/v1/connectors
+
+###
+GET {{OpsPlatform.Api_HostAddress}}/api/v1/database-providers
+
+###
+GET {{OpsPlatform.Api_HostAddress}}/api/v1/ai-providers
+
+###
+GET {{OpsPlatform.Api_HostAddress}}/api/v1/prompt-templates
+
+### No secrets or personal data; ephemeral, bounded to 200 entries
+POST {{OpsPlatform.Api_HostAddress}}/api/v1/feedback
+Content-Type: application/json
+
+{"category":"suggestion","message":"演示反馈：希望资产类型可筛选","page":"/assets"}
+
+###
+GET {{OpsPlatform.Api_HostAddress}}/api/v1/feedback

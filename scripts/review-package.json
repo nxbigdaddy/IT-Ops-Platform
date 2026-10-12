@@ -1,0 +1,66 @@
+{
+    "materials":  [
+                      {
+                          "source":  "docs/原型演示说明.md",
+                          "target":  "评审说明.md"
+                      },
+                      {
+                          "source":  "docs/部门原型验收清单.md",
+                          "target":  "验收清单.md"
+                      },
+                      {
+                          "source":  "docs/原型范围与case映射.md",
+                          "target":  "范围与case映射.md"
+                      },
+                      {
+                          "source":  "docs/已知问题与下一迭代.md",
+                          "target":  "已知问题与下一迭代.md"
+                      },
+                      {
+                          "source":  "artifacts/prototype/检查记录.md",
+                          "target":  "检查记录.md"
+                      },
+                      {
+                          "source":  "artifacts/prototype/评审记录单.md",
+                          "target":  "评审记录单.md"
+                      }
+                  ],
+    "required":  [
+                     "DEMO-README.txt",
+                     "评审说明.md",
+                     "验收清单.md",
+                     "范围与case映射.md",
+                     "已知问题与下一迭代.md",
+                     "检查记录.md",
+                     "case-records-template.csv",
+                     "prototype-manifest.json",
+                     "serve-demo.mjs",
+                     "评审记录单.md"
+                 ],
+    "readme":  [
+                   "材料清单（均在包根目录）：",
+                   "  DEMO-README.txt",
+                   "  评审说明.md",
+                   "  验收清单.md",
+                   "  范围与case映射.md",
+                   "  已知问题与下一迭代.md",
+                   "  检查记录.md",
+                   "  case-records-template.csv",
+                   "  prototype-manifest.json",
+                   "  serve-demo.mjs",
+                   "  评审记录单.md"
+               ],
+    "checkLog":  {
+                     "title":  "# 自动检查记录（开发自测，非部门验收）",
+                     "buildIdLabel":  "构建标识",
+                     "unsetBuildId":  "（未设置）",
+                     "runTimeLabel":  "运行时间",
+                     "durationUnit":  "秒",
+                     "checksLabel":  "检查项",
+                     "allPassed":  "个，全部通过。",
+                     "scopeNote":  "结论范围：仅代表本机自动化检查通过；不代表设备连通、模型调用、持久化或生产就绪，也不代替部门评审与签认。",
+                     "tableHeader":  "| 检查项 | 退出码 | 用时(秒) |",
+                     "tableDivider":  "| --- | --- | --- |",
+                     "footer":  "本记录由 scripts/verify-prototype.ps1 生成；原始数据见 verify-summary.json。"
+                 }
+}
